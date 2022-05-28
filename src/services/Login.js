@@ -4,7 +4,8 @@ const fetch = require("node-fetch");
  * Logs the user in.
  * @param {String} BASEURL 
  * @param {String} username 
- * @param {String} password 
+ * @param {String} password
+ * @param {Object} [options] 
  * @returns {Promise<Response>}
  */
 async function Login(BASEURL, username, password, options) {

@@ -5,9 +5,9 @@ const fetch = require("node-fetch");
  * @param {String} BASEURL 
  * @param {String} ALL_COOKIES 
  * @param {String} USER_ID 
- * @param {String} startDate 
- * @param {String} endDate 
- * @param {String} limit 
+ * @param {Date} startDate 
+ * @param {Date} endDate 
+ * @param {number} limit 
  * @returns {Promise<void>}
  */
 async function GetCalendarEventsByUser(

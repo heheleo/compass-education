@@ -126,7 +126,9 @@ class Client {
 
 	/**
 	 * Gets the classes on a specific date, or today if none provided.
-	 * @param {Object} options
+	 * @param {Date} dateFrom
+	 * @param {Date} dateTo
+	 * @param {boolean} raw
 	 * @returns {Array}
 	 */
 	async getClasses(
@@ -326,7 +328,7 @@ class Client {
 	/**
 	 * Gets all the staff listed in the school.
 	 * @param {Number} limit 
-	 * @param {Number} raw 
+	 * @param {boolean} raw 
 	 * @returns {Array<Object>} an array of objects containing the staff information
 	 */
 	async getAllStaff(limit = 25, raw = false) {
