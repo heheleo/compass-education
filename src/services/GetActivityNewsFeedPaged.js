@@ -5,10 +5,9 @@ const fetch = require("node-fetch");
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
  * @param {String} ACTIVITY_ID
- * @param {Number} LIMIT Limit of pages 
  * @returns {Promise<Response>}
  */
-async function GetActivityNewsFeedPaged(BASEURL, ALL_COOKIES, ACTIVITY_ID, LIMIT) {
+async function GetActivityNewsFeedPaged(BASEURL, ALL_COOKIES, ACTIVITY_ID) {
 	return await fetch(
 		`https://${BASEURL}/Services/NewsFeed.svc/GetActivityNewsFeedPaged`,
 		{
@@ -16,7 +15,7 @@ async function GetActivityNewsFeedPaged(BASEURL, ALL_COOKIES, ACTIVITY_ID, LIMIT
 			body: JSON.stringify(
 				{
 					"activityId": ACTIVITY_ID,
-					"limit": LIMIT.toString(),
+					"limit": "25",
 					"start": "0",
 				}
 			),

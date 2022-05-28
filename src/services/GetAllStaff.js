@@ -4,17 +4,16 @@ const fetch = require("node-fetch");
  * Gets all the staff of the school.
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
- * @param {Number} LIMIT Limit of staff
  * @returns {Promise<Response>}
  */
-async function GetAllStaff(BASEURL, ALL_COOKIES, LIMIT) {
+async function GetAllStaff(BASEURL, ALL_COOKIES) {
 	return await fetch(
 		`https://${BASEURL}/Services/User.svc/GetAllStaff`,
 		{
 			method: "POST",
 			body: JSON.stringify(
 				{
-					"limit": LIMIT,
+					"limit": 25,
 					"page": 1,
 					"start": 0,
 				}

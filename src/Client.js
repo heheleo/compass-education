@@ -188,39 +188,38 @@ class Client {
 		const response = await GetActivityNewsFeedPaged(
 			this.BASEURL, 
 			this.ALL_COOKIES, 
-			activityId, 
-			options.limit || 10
+			activityId
 		).then(res => res.json());
 
 		if(response["h"]) return null;
 			
-		if(!options.raw) return response["d"]["data"];
-		else {
-			const toReturn = [];
-			response["d"]["data"].forEach(item => {
-				toReturn.push({
-					attachments: item.Attachments,
-					byAdmin: item.CreatedByAdmin,
-					emailSentDate: item.EmailSentDate,
-					finish: item.Finish,
-					start: item.Start,
-					locked: item.Locked,
-					priority: item.Priority,
-					type: item.CommunicationType,
-					newsItemId: item.NewsItemId,
-					user: {
-						username: item.UserName,
-						icon: `https://${this.BASEURL}${item.UserImageUrl}`
-					},
-					content: {
-						title: item.Title,
-						contentOne: item.Content1,
-						contentTwo: item.content2,
-					}
-				});
+		let toReturn = [];
+		if(!options.raw) toReturn = response["d"]["data"];
+		else response["d"]["data"].forEach(item => {
+			toReturn.push({
+				attachments: item.Attachments,
+				byAdmin: item.CreatedByAdmin,
+				emailSentDate: item.EmailSentDate,
+				finish: item.Finish,
+				start: item.Start,
+				locked: item.Locked,
+				priority: item.Priority,
+				type: item.CommunicationType,
+				newsItemId: item.NewsItemId,
+				user: {
+					username: item.UserName,
+					icon: `https://${this.BASEURL}${item.UserImageUrl}`
+				},
+				content: {
+					title: item.Title,
+					contentOne: item.Content1,
+					contentTwo: item.content2,
+				}
 			});
-			return toReturn;
-		}
+		});
+
+		if(options.limit && !isNaN(options.limit)) return toReturn.slice(0, options.limit);
+		else return toReturn;
 	}
 
 	/**
@@ -303,11 +302,10 @@ class Client {
 	 * @param {Number} limit 
 	 * @returns {Array<Object>} an array of objects containing location information.
 	 */
-	async getAllLocations(limit = 25) {
+	async getAllLocations(limit) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
 
-		const _limit = limit || 25;
-		const response = await GetAllLocations(this.BASEURL, this.ALL_COOKIES, _limit)
+		const response = await GetAllLocations(this.BASEURL, this.ALL_COOKIES)
 			.then(res => res.json());
 		
 		if(response["h"]) return null;
@@ -322,7 +320,9 @@ class Client {
 				name: location.roomName
 			});
 		});
-		return toReturn;
+
+		if(limit && !isNaN(limit)) return toReturn.slice(0, limit);
+		else return toReturn;
 	}
 
 	/**
@@ -331,20 +331,17 @@ class Client {
 	 * @param {boolean} raw 
 	 * @returns {Array<Object>} an array of objects containing the staff information
 	 */
-	async getAllStaff(limit = 25, raw = false) {
+	async getAllStaff(limit, raw = false) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
 
-		const _limit = limit || 25;
-
-		const response = await GetAllStaff(this.BASEURL, this.ALL_COOKIES, _limit)
+		const response = await GetAllStaff(this.BASEURL, this.ALL_COOKIES)
 			.then(res => res.json());
 			
 		if(response["h"]) return null;
 
-		if(raw) return response["d"];
-
-		const toReturn = [];
-		response["d"].forEach(staff => {
+		let toReturn = [];
+		if(raw) toReturn = response["d"];
+		else response["d"].forEach(staff => {
 			toReturn.push({
 				email: staff.ce,
 				id: staff.id,
@@ -355,7 +352,9 @@ class Client {
 				displayCode: staff.displayCode
 			});
 		});
-		return toReturn;
+
+		if(limit && !isNaN(limit)) return toReturn.slice(0, limit);
+		else return toReturn;
 	} 
 
 	/**
@@ -363,12 +362,10 @@ class Client {
 	 * @param {Number} limit 
 	 * @returns {Array<Object>} an array of objects containing task data
 	 */
-	async getUserTasks(limit = 25) {
+	async getUserTasks(limit) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
-		
-		const _limit = limit || 25;
 
-		const response = await GetTaskItems(this.BASEURL, this.ALL_COOKIES, _limit)
+		const response = await GetTaskItems(this.BASEURL, this.ALL_COOKIES)
 			.then(res => res.json());
 			
 		if(response["h"]) return null;
@@ -382,7 +379,9 @@ class Client {
 				completed: task.status
 			});
 		});
-		return toReturn;
+
+		if(limit && !isNaN(limit)) return toReturn.slice(0, limit);
+		else return toReturn;
 	}
 }
 

@@ -7,7 +7,6 @@ const fetch = require("node-fetch");
  * @param {String} USER_ID 
  * @param {Date} startDate 
  * @param {Date} endDate 
- * @param {number} limit 
  * @returns {Promise<void>}
  */
 async function GetCalendarEventsByUser(
@@ -15,8 +14,7 @@ async function GetCalendarEventsByUser(
 	ALL_COOKIES, 
 	USER_ID,
 	startDate = new Date(),
-	endDate = new Date(),
-	limit = 25
+	endDate = new Date()
 ) {
 	return await fetch(
 		`https://${BASEURL}/Services/Calendar.svc/GetCalendarEventsByUser`,
@@ -27,7 +25,7 @@ async function GetCalendarEventsByUser(
 					"userId": parseInt(USER_ID),
 					"startDate": startDate.toISOString().split("T")[0],
 					"endDate": endDate.toISOString().split("T")[0],
-					"limit": limit,
+					"limit": 25,
 					"start": 0,
 					"page": 1
 				}

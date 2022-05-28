@@ -4,12 +4,11 @@ const fetch = require("node-fetch");
  * Gets all the locations
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
- * @param {Number} LIMIT Limit of locations returned 
  * @returns {Promise<Response>}
  */
-async function GetAllLocations(BASEURL, ALL_COOKIES, LIMIT) {
+async function GetAllLocations(BASEURL, ALL_COOKIES) {
 	return await fetch(
-		`https://${BASEURL}/Services/ReferenceDataCache.svc/GetAllLocations?page=1&start=0&limit=${LIMIT}`,
+		`https://${BASEURL}/Services/ReferenceDataCache.svc/GetAllLocations?page=1`,
 		{
 			method: "GET",
 			headers: {
