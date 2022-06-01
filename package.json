@@ -1,6 +1,6 @@
 {
 	"name": "compass-education",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "A package to interact with Compass, the popular school management system.",
 	"main": "src/index.js",
 	"types": "typings/index.d.ts",

@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 /**
- * Logs the user in.
+ * Logs the user in
  * @param {String} BASEURL 
  * @param {String} username 
  * @param {String} password

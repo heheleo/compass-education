@@ -14,64 +14,67 @@ declare class Client {
     ALL_COOKIES: string;
     USER_ID: any;
     /**
-     * Sets the baseURL.
-     * @param {String} url the baseURL of the school
+     * Takes in a string as a variable. Sets the base URL.
+     * @param {String} url the base URL of the school
      */
     setBaseURL(url: string): void;
     /**
-     * Logs the client in, and retrieves a SID.
-     * @param {String} username Username of the user
-     * @param {String} password Password of the user
-     * @returns {Promise<string>} The SID of the user
+     * Logs the client in, and returns a SID.
+     * @param {String} username username of the user
+     * @param {String} password password of the user
+     * @returns {Promise<string>} the SID of the user
      */
     login(username: string, password: string): Promise<string>;
     /**
-     * Gets the name information, formatted by Compass's backend.
-     * @returns {Object} information about the user's name.
+     * Gets the current user's name information.
+     * @returns {Promise<Object>} information about the user's name.
      */
-    getName(): any;
+    getName(): Promise<any>;
     /**
-     * Gets the classes on a specific date, or today if none provided.
-     * @param {Object} options
-     * @returns {Array}
+     * Gets the classes on a specific date range, or the current date if none is provided.
+     * @param {Date} dateFrom the start of range
+     * @param {Date} dateTo the end of range
+     * @param {boolean} raw raw response from Compass
+     * @returns {Promise<Array<Object>>}
      */
-    getClasses(dateFrom?: Date, dateTo?: Date, raw?: boolean): any[];
+    getClasses(dateFrom?: Date, dateTo?: Date, raw?: boolean): Promise<Array<any>>;
     /**
-     * Gets the news feed for an activity.
-     * @param {String} activityId activityId of the activity.
-     * @param {Object} options
-     * @returns {Array}
+     * Gets the news feed for an activity
+     * @param {string} activityId id of the activity
+     * @param {Object} options change the limit or raw mode
+     * @returns {Promise<Array<Object>>}
      */
-    getActivityNewsFeed(activityId: string, options?: any): any[];
+    getActivityNewsFeed(activityId: string, options?: any): Promise<Array<any>>;
     /**
-     * Get a lesson plan of a class via downloading the file asset.
-     * @param {String} instanceId
+     * Get a lesson plan for a class via downloading the file asset.
+     * @param {String} instanceId instanceId of the class
+     * @returns {Promise<string>}
      */
     getLessonPlan(instanceId: string): Promise<string>;
     /**
-     * Gets the detailed information about a class.
-     * @param {String} instanceId
-     * @param {Boolean} raw
-     * @returns {Object} information about the class
+     * Gets detailed information about a class.
+     * @param {String} instanceId instanceId of the class
+     * @param {Boolean} raw raw response from Compass
+     * @returns {Promise<Object>} information about the class
      */
-    getClassInfo(instanceId: string, raw?: boolean): any;
+    getClassInfo(instanceId: string, raw?: boolean): Promise<any>;
     /**
      * Gets all the locations in the entire school.
-     * @param {Number} limit
-     * @returns {Array<Object>} an array of objects containing location information.
+     * @param {number} limit limit of objects in the array
+     * @returns {Promise<Array<Object>>} an array of objects containing location information.
      */
-    getAllLocations(limit?: number): Array<any>;
+    getAllLocations(limit: number): Promise<Array<any>>;
     /**
      * Gets all the staff listed in the school.
-     * @param {Number} limit
-     * @param {Number} raw
-     * @returns {Array<Object>} an array of objects containing the staff information
+     * @param {number} limit limit of objects in the array
+     * @param {boolean} raw raw response from Compass
+     * @returns {Promise<Array<Object>>} an array of objects containing the staff information
      */
-    getAllStaff(limit?: number, raw?: number): Array<any>;
+    getAllStaff(limit: number, raw?: boolean): Promise<Array<any>>;
     /**
-     * Gets the current user's tasks
-     * @param {Number} limit
-     * @returns {Array<Object>} an array of objects containing task data
+     * Gets the logged-in user's tasks
+     * @param {number} limit limit of objects in the array
+     * @returns {Promise<Array<Object>>} an array of objects containing task data
      */
-    getUserTasks(limit?: number): Array<any>;
+    getUserTasks(limit: number): Promise<Array<any>>;
 }

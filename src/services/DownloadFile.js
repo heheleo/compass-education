@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 /**
- * Gets the news feed page about an activity, such as classes.
+ * Gets the news feed page about an activity, such as classes
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
  * @param {String} ID ID of the file you want to download 

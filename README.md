@@ -12,14 +12,16 @@ npm i compass-education
 ```
 
 ## Get Started
+[Read the documentation here!](https://compass-education.leo0.xyz)
+
 A basic example to fetch all classes for the day.
 ```
 const Compass = require("compass-education");
 const Client = new Compass.Client("https://xx.compass.education");
 
 (async () => {
-	await client.login("Username", "Password");
-	const classes = await client.getClasses();
+	await Client.login("Username", "Password");
+	const classes = await Client.getClasses();
 	// example output below
 })();
 ```

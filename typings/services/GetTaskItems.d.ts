@@ -1,6 +1,6 @@
 export = GetTaskItems;
 /**
- * Gets the tasks of the current user.
+ * Gets the tasks of the current user
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
  * @param {Number} LIMIT Limit of tasks returned

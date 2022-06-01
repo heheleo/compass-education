@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 /**
- * Gets all the staff of the school.
+ * Gets all the staff of the school
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
  * @returns {Promise<Response>}

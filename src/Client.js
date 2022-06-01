@@ -29,8 +29,8 @@ class Client {
 	}
 
 	/**
-	 * Sets the baseURL.
-	 * @param {String} url the baseURL of the school
+	 * Takes in a string as a variable. Sets the base URL.
+	 * @param {String} url the base URL of the school
 	 */
 	setBaseURL(url) {
 		if (typeof url !== "string")
@@ -45,10 +45,10 @@ class Client {
 	}
 
 	/**
-	 * Logs the client in, and retrieves a SID.
-	 * @param {String} username Username of the user
-	 * @param {String} password Password of the user
-	 * @returns {Promise<string>} The SID of the user
+	 * Logs the client in, and returns a SID.
+	 * @param {String} username username of the user
+	 * @param {String} password password of the user
+	 * @returns {Promise<string>} the SID of the user
 	 */
 	async login(username, password) {
 		if (this.SID)
@@ -58,54 +58,59 @@ class Client {
 		if (this.BASEURL == null)
 			throw new Error("The BaseURL of the client is not set. Set it at the constructor or use setBaseURL().");
 
-		const response = await Login(this.BASEURL, username, password);
+		try {
+			const response = await Login(this.BASEURL, username, password);
 
-		// Check if login was successful
-		const cookies = response.headers.get("set-cookie").split("; ");
-		this.ALL_COOKIES = [...new Set(response.headers.get("set-cookie").split("; "))].join(";");
-
-		let successful = false;
-
-		for (const cookie of cookies) {
-			if (cookie.includes("username")) successful = true;
-			if (cookie.includes("cpssid")) this.SID = cookie.split("=")[1];
-		}
-
-		// Fetch the User ID which is used for every request
-		const responseWithRedirects = await fetch(
-			new URL(response.headers.get("location"), response.url), 
-			{
-				method: "GET",
-				redirect: "follow",
-				headers: {
-					cookie: this.ALL_COOKIES
-				}
+			// Check if login was successful
+			const cookies = response.headers.get("set-cookie").split("; ");
+			this.ALL_COOKIES = [...new Set(response.headers.get("set-cookie").split("; "))].join(";");
+	
+			let successful = false;
+	
+			for (const cookie of cookies) {
+				if (cookie.includes("username")) successful = true;
+				if (cookie.includes("cpssid")) this.SID = cookie.split("=")[1];
 			}
-		);
-
-		const html = await responseWithRedirects.text();
-
-		this.USER_ID = html.match(/(Compass.organisationUserId)(.*?)(;$)/gm)[0]
-			.replace("Compass.organisationUserId = ", "")
-			.replace(";", "");
-
-		if(isNaN(parseInt(this.USER_ID))) {
-			// Invalid user id
-			this.USER_ID = null;
-			throw new Error("Invalid User ID found. This might be because of the school, please submit an issue on GitHub.");
-		}
-		
-		if(successful) {
-			return this.SID;
-		} else {
-			this.SID = null;
-			throw new Error("Login attempt failed. This is either because of invalid credentials or base URL.");
+	
+			// Fetch the User ID which is used for every request
+			const responseWithRedirects = await fetch(
+				new URL(response.headers.get("location"), response.url), 
+				{
+					method: "GET",
+					redirect: "follow",
+					headers: {
+						cookie: this.ALL_COOKIES
+					}
+				}
+			);
+	
+			const html = await responseWithRedirects.text();
+	
+			this.USER_ID = html.match(/(Compass.organisationUserId)(.*?)(;$)/gm)[0]
+				.replace("Compass.organisationUserId = ", "")
+				.replace(";", "");
+	
+			if(isNaN(parseInt(this.USER_ID))) {
+				// Invalid user id
+				this.USER_ID = null;
+				throw new Error("Invalid User ID found. This might be because of the school, please submit an issue on GitHub.");
+			}
+			
+			if(successful) {
+				return this.SID;
+			} else {
+				this.SID = null;
+				throw new Error("Login attempt failed. This is either because of invalid credentials or base URL.");
+			}
+		} catch(e) {
+			// Mostly because of invalid base URL
+			throw new Error("Login attempt failed. This is most likely a base URL error.");
 		}
 	}
 
 	/**
-	 * Gets the name information, formatted by Compass's backend.
-	 * @returns {Object} information about the user's name.
+	 * Gets the current user's name information.
+	 * @returns {Promise<Object>} information about the user's name.
 	 */
 	async getName() {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
@@ -125,11 +130,11 @@ class Client {
 	}
 
 	/**
-	 * Gets the classes on a specific date, or today if none provided.
-	 * @param {Date} dateFrom
-	 * @param {Date} dateTo
-	 * @param {boolean} raw
-	 * @returns {Array}
+	 * Gets the classes on a specific date range, or the current date if none is provided.
+	 * @param {Date} dateFrom the start of range
+	 * @param {Date} dateTo the end of range
+	 * @param {boolean} raw raw response from Compass
+	 * @returns {Promise<Array<Object>>}
 	 */
 	async getClasses(
 		dateFrom = new Date(),
@@ -172,10 +177,10 @@ class Client {
 	}
 
 	/**
-	 * Gets the news feed for an activity.
-	 * @param {String} activityId activityId of the activity.
-	 * @param {Object} options 
-	 * @returns {Array}
+	 * Gets the news feed for an activity
+	 * @param {string} activityId id of the activity
+	 * @param {Object} options change the limit or raw mode
+	 * @returns {Promise<Array<Object>>}
 	 */
 	async getActivityNewsFeed(activityId, options = {
 		limit: 10,
@@ -223,8 +228,9 @@ class Client {
 	}
 
 	/**
-	 * Get a lesson plan of a class via downloading the file asset.
-	 * @param {String} instanceId 
+	 * Get a lesson plan for a class via downloading the file asset.
+	 * @param {String} instanceId instanceId of the class 
+	 * @returns {Promise<string>}
 	 */
 	async getLessonPlan(instanceId) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
@@ -238,10 +244,10 @@ class Client {
 	}
 
 	/**
-	 * Gets the detailed information about a class.
-	 * @param {String} instanceId 
-	 * @param {Boolean} raw 
-	 * @returns {Object} information about the class
+	 * Gets detailed information about a class.
+	 * @param {String} instanceId instanceId of the class
+	 * @param {Boolean} raw raw response from Compass
+	 * @returns {Promise<Object>} information about the class
 	 */
 	async getClassInfo(instanceId, raw = false) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
@@ -252,7 +258,7 @@ class Client {
 			this.BASEURL, 
 			this.ALL_COOKIES,
 			instanceId
-		).then(res => res.json());
+		).then(res => res.json());	
 
 		if(response["h"]) return null;
 		
@@ -299,8 +305,8 @@ class Client {
 	
 	/**
 	 * Gets all the locations in the entire school.
-	 * @param {Number} limit 
-	 * @returns {Array<Object>} an array of objects containing location information.
+	 * @param {number} limit limit of objects in the array
+	 * @returns {Promise<Array<Object>>} an array of objects containing location information.
 	 */
 	async getAllLocations(limit) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
@@ -327,9 +333,9 @@ class Client {
 
 	/**
 	 * Gets all the staff listed in the school.
-	 * @param {Number} limit 
-	 * @param {boolean} raw 
-	 * @returns {Array<Object>} an array of objects containing the staff information
+	 * @param {number} limit limit of objects in the array
+	 * @param {boolean} raw raw response from Compass
+	 * @returns {Promise<Array<Object>>} an array of objects containing the staff information
 	 */
 	async getAllStaff(limit, raw = false) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");
@@ -358,9 +364,9 @@ class Client {
 	} 
 
 	/**
-	 * Gets the current user's tasks
-	 * @param {Number} limit 
-	 * @returns {Array<Object>} an array of objects containing task data
+	 * Gets the logged-in user's tasks
+	 * @param {number} limit limit of objects in the array
+	 * @returns {Promise<Array<Object>>} an array of objects containing task data
 	 */
 	async getUserTasks(limit) {
 		if(!this.BASEURL || !this.ALL_COOKIES || !this.USER_ID) throw new Error("Client not logged in whilst attempting to use a function.");

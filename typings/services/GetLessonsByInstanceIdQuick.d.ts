@@ -1,6 +1,6 @@
 export = GetLessonsByInstanceIdQuick;
 /**
- * Gets the name of the current user.
+ * Gets the name of the current user
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
  * @param {String} instanceId instanceId of the class.

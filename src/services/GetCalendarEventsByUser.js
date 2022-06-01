@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 /**
- * Gets the classes between two dates.
+ * Gets the classes between two dates
  * @param {String} BASEURL 
  * @param {String} ALL_COOKIES 
  * @param {String} USER_ID 

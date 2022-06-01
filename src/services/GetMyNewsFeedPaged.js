@@ -1,23 +1,16 @@
 const fetch = require("node-fetch");
 
 /**
- * Gets the name of the current user
+ * Gets the news feed of the current user
  * @param {String} BASEURL
  * @param {String} ALL_COOKIES
- * @param {String} instanceId instanceId of the class.
  * @returns {Promise<Response>}
  */
-async function GetLessonsByInstanceIdQuick(BASEURL, ALL_COOKIES, instanceId) {
-	// 
+async function DownloadFile(BASEURL, ALL_COOKIES) {
 	return await fetch(
-		`https://${BASEURL}/Services/Activity.svc/GetLessonsByInstanceIdQuick`,
+		`https://${BASEURL}/Services/FileAssets.svc/DownloadFile?id=${ID}`,
 		{
-			method: "POST",
-			body: JSON.stringify(
-				{
-					"instanceId": instanceId
-				}
-			),
+			method: "GET",
 			headers: {
 				"User-Agent":
 					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
@@ -28,4 +21,4 @@ async function GetLessonsByInstanceIdQuick(BASEURL, ALL_COOKIES, instanceId) {
 	);
 }
 
-module.exports = GetLessonsByInstanceIdQuick;
+module.exports = DownloadFile;
