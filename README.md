@@ -12,7 +12,7 @@ npm i compass-education
 ```
 
 ## Get Started
-[Read the documentation here!](https://compass-education.leo0.xyz)
+[Read the documentation here!](https://heyimleo.gitbook.io/compass-education/)
 
 A basic example to fetch all classes for the day.
 ```
