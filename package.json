@@ -1,31 +1,31 @@
 {
 	"name": "compass-education",
-	"version": "1.1.5",
+	"version": "1.1.0",
 	"description": "A package to interact with Compass, the popular school management system.",
 	"main": "src/index.js",
 	"types": "typings/index.d.ts",
 	"scripts": {},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/disaaalt/compass-education.git"
+		"url": "git+https://github.com/heheleoo/compass-education.git"
 	},
 	"keywords": [
 		"compass",
-		"compass-education"
+		"compass-education",
+		"jdlf-compass"
 	],
-	"author": "Leo",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/disaaalt/compass-education/issues"
+		"url": "https://github.com/heheleoo/compass-education/issues"
 	},
-	"homepage": "https://github.com/disaaalt/compass-education#readme",
+	"homepage": "https://github.com/heheleoo/compass-education#readme",
 	"dependencies": {
 		"node-fetch": "^2.6.7"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.25.0",
-		"@typescript-eslint/parser": "^5.25.0",
-		"eslint": "^8.15.0",
-		"typescript": "^4.6.4"
+		"@typescript-eslint/eslint-plugin": "^6.18.1",
+		"@typescript-eslint/parser": "^6.18.1",
+		"eslint": "^8.56.0",
+		"typescript": "^5.3.3"
 	}
 }
