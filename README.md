@@ -1,3 +1,5 @@
+## :exclamation: Due to additional checks implemented by Compass, programmically logging into Compass is now impossible without browser emulation. Therefore, I will be sunsetting this project.
+
 # compass-education
 
 A package to interact with Compass, a school management system in Australia.
