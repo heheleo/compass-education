@@ -1,4 +1,4 @@
-import CompassClient from "../classes/CompassClient";
+import { CompassClient } from "../classes/CompassClient";
 
 export interface CompassUserDetails {
     /**
