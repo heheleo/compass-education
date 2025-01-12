@@ -5,6 +5,7 @@ import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
 import GetAllLocations from "../endpoints/GetAllLocations";
+import GetUserDetails from "../endpoints/GetUserDetails";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
@@ -278,4 +279,5 @@ export default class CompassClient {
 	}
 
 	public getAllLocations = GetAllLocations;
+	public getUserDetails = GetUserDetails;
 }
