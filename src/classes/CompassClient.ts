@@ -47,7 +47,7 @@ interface CompassClientFetchCookiesParams {
  * logging in and fetching data.
  * @class CompassClient
  */
-export default class CompassClient {
+export class CompassClient {
 	/**
 	 * The base URL of the institute using Compass.
 	 */
