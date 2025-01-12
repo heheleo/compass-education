@@ -82,26 +82,48 @@ export class CompassClient {
 	 * constructing a CompassClient instance.
 	 */
 	constructor({ baseURL, cookies }: CompassClientConstructorParams);
-	constructor({ baseURL, cookies }: CompassClientConstructorParams) {
-		if (!baseURL)
+	/**
+	 * Constructs a new CompassClient instance. Note that cookies is an optional
+	 * parameter (as you may call {@link CompassClient.login}). You must set the
+	 * cookies before making requests to Compass's endpoints.
+	 *
+	 * Call {@link CompassClient.initialise} after constructing the instance, to
+	 * create the browser used for making requests.
+	 *
+	 * @param {string} baseURL The base URL of the institute using Compass.
+	 */
+	constructor(baseURL: string);
+	constructor(arg: CompassClientConstructorParams | string) {
+		let params: CompassClientConstructorParams = { baseURL: "", cookies: [] };
+
+		// Check if the argument is a string:
+		if (typeof arg === "string") {
+			// The argument is a base URL:
+			params.baseURL = arg;
+		} else {
+			// The argument is a params object:
+			params = arg;
+		}
+
+		if (!params.baseURL)
 			throw new Error(
 				"Base URL is required when constructing a CompassClient instance."
 			);
-		this.baseURL = baseURL;
+		this.baseURL = params.baseURL;
 
-		if (cookies && cookies.length) {
+		if (params.cookies && params.cookies.length) {
 			// Check if the cookies are Puppeteer cookies:
-			if (typeof cookies[0] !== "string") {
-				this.cookies = cookies as Cookie[];
+			if (typeof params.cookies[0] !== "string") {
+				this.cookies = params.cookies as Cookie[];
 			} else {
 				// Convert the cookies to Puppeteer cookies:
 				this.cookies = CompassClient.unmarshalCookies(
-					cookies as string[]
+					params.cookies as string[]
 				);
 			}
 
 			// Convert the cookies to Puppeteer cookies:
-			this.cookies = CompassClient.unmarshalCookies(cookies as string[]);
+			this.cookies = CompassClient.unmarshalCookies(params.cookies as string[]);
 		}
 	}
 
