@@ -217,6 +217,12 @@ export class CompassClient {
         username,
         password,
     }: CompassClientFetchCookiesParams) {
+        // Check if the browser has been initialised:
+        if (!this.browser || !this.page) {
+            // Initialise the browser, if not already done:
+            await this.initialise();
+        }
+
         const cookies = await fetchCookies({
             username,
             password,
@@ -271,6 +277,12 @@ export class CompassClient {
         method: "GET" | "POST" = "GET",
         body?: any
     ): Promise<any> {
+        // Check if the browser has been initialised:
+        if (!this.browser || !this.page) {
+            // Initialise the browser, if not already done:
+            await this.initialise();
+        }
+
         if (!this.cookies || !this.cookies.length)
             throw new Error("Cookies must be set before making requests.");
 
