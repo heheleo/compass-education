@@ -1,31 +1,46 @@
 {
 	"name": "compass-education",
-	"version": "1.0.4",
-	"description": "A package to interact with Compass, the popular school management system.",
-	"main": "src/index.js",
-	"types": "typings/index.d.ts",
-	"scripts": {},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/disaaalt/compass-education.git"
+	"version": "2.0.0",
+	"description": "Scraper for Compass, an online Australian education platform",
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"exports": {
+		"import": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		},
+		"require": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "pnpm tsup src/index.ts --format esm,cjs --sourcemap --minify --dts --clean --treeshake",
+		"lint": "pnpm oxlint src --fix",
+		"format": "pnpm prettier --write \"src/**/*.ts\""
 	},
 	"keywords": [
 		"compass",
-		"compass-education"
+		"compass-education",
+		"scraper"
 	],
-	"author": "Leo",
-	"license": "GPL-3.0",
-	"bugs": {
-		"url": "https://github.com/disaaalt/compass-education/issues"
-	},
-	"homepage": "https://github.com/disaaalt/compass-education#readme",
-	"dependencies": {
-		"node-fetch": "^2.6.7"
-	},
+	"author": "heheleo",
+	"license": "MIT",
+	"packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^5.25.0",
-		"@typescript-eslint/parser": "^5.25.0",
-		"eslint": "^8.15.0",
-		"typescript": "^4.6.4"
+		"@types/node": "^22.10.5",
+		"oxlint": "^0.15.5",
+		"prettier": "^3.4.2",
+		"tsup": "^8.3.5",
+		"tsx": "^4.19.2"
+	},
+	"dependencies": {
+		"cookie": "^1.0.2",
+		"puppeteer": "^24.0.0",
+		"puppeteer-extra": "^3.3.6",
+		"puppeteer-extra-plugin-adblocker": "^2.13.6",
+		"puppeteer-extra-plugin-stealth": "^2.11.2",
+		"user-agents": "^1.1.415"
 	}
 }
