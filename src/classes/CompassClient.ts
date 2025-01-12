@@ -133,9 +133,9 @@ export class CompassClient {
     }
 
     /**
-     * Initialise the CompassClient instance. This method should be called after
-     * constructing the instance, and before making any requests to Compass's
-     * endpoints.
+     * Initialise the browser used for requests. This method should be called
+     * after constructing the instance, and before making any requests to
+     * Compass's endpoints.
      *
      * This creates the browser used for making requests to Compass's endpoints.
      */
@@ -188,8 +188,8 @@ export class CompassClient {
         // Check if cookies are empty:
         if (cookies.length === 0) throw new Error("Cookies cannot be empty.");
 
-        // Check if the cookies are Puppeteer cookies.
-        // Should use a user-defined type guard here
+        // Check if the cookies are Puppeteer cookies. Should use a user-defined
+        // type guard here
         if (typeof cookies[0] !== "string") {
             this.cookies = cookies as Cookie[];
         } else {
