@@ -4,6 +4,7 @@ import AdBlockerPlugin from "puppeteer-extra-plugin-adblocker";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
+import GetAllLocations from "../endpoints/GetAllLocations";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
@@ -275,4 +276,6 @@ export default class CompassClient {
 
 		return response;
 	}
+
+	public getAllLocations = GetAllLocations;
 }
