@@ -79,11 +79,15 @@ export interface CompassUserDetails {
  * @returns {Promise<CompassUserDetails>} the user details
  */
 export default async function GetAllLocations(
-    this: CompassClient
+    this: CompassClient,
+    userID: number,
 ): Promise<CompassUserDetails> {
     const request = await this.request(
         "/Services/User.svc/GetUserDetailsBlobByUserId",
-        "POST"
+        "POST",
+        {
+            targetUserId: userID,
+        }
     );
 
     if (!request || !request?.d) {
