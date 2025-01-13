@@ -20,8 +20,7 @@ GetUserDetails.after(() => {
 let response: CompassUserDetails | null = null;
 
 GetUserDetails("Is data returned", async () => {
-    const userId = await global.compass.getUserID();
-    response = await global.compass.getUserDetails(userId);
+    response = await global.compass.getUserDetails();
     assert.ok(response);
 });
 

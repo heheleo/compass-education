@@ -6,7 +6,6 @@ import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
 import GetAllLocations from "../endpoints/GetAllLocations";
 import GetUserDetails from "../endpoints/GetUserDetails";
-import GetUserID from "../endpoints/GetUserId";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
@@ -58,6 +57,10 @@ export class CompassClient {
      * Compass's Cloudflare checks.
      */
     public cookies?: Cookie[];
+    /**
+     * The user ID of the logged in user.
+     */
+    public userID: number = -1;
     /**
      * Whether the cookies have been set in the browser.
      */
@@ -303,6 +306,16 @@ export class CompassClient {
             });
         }
 
+        // Get the user ID if not already set:
+        if(this.userID === -1) {
+            const userId = await this["page"].evaluate("window?.Compass?.organisationUserId");
+            if(!Number.isInteger(userId)) {
+                throw new Error("Could not find the user ID");
+            }
+            
+            this.userID = userId as number;
+        }
+
         this.baseURL = this.page.url();
 
         // Construct the URL:
@@ -334,6 +347,5 @@ export class CompassClient {
     }
 
     public getAllLocations = GetAllLocations;
-    public getUserID = GetUserID;
     public getUserDetails = GetUserDetails;
 }
