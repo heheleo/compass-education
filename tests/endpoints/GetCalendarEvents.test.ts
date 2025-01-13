@@ -1,7 +1,7 @@
 import { suite } from "uvu";
 import * as assert from "uvu/assert";
-import { CompassCalendarEvent } from "../../src/endpoints/GetCalendarEvents";
 import { finishEndpointTest, initialise } from "../setup";
+import type { CompassCalendarEvent } from "../../src/endpoints/GetCalendarEvents";
 
 const GetCalendarEvents = suite("GetCalendarEvents");
 GetCalendarEvents.before(async () => {
@@ -27,7 +27,7 @@ GetCalendarEvents("Is data returned", async () => {
 // Note: cannot test date options as this might differ across users.
 
 GetCalendarEvents("Is data an array", () => {
-	assert.instance(response, Array);
+    assert.instance(response, Array);
 });
 
 GetCalendarEvents.run();

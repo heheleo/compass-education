@@ -1,6 +1,6 @@
 import { suite } from "uvu";
 import * as assert from "uvu/assert";
-import { CompassLocation } from "../../src/endpoints/GetAllLocations";
+import type { CompassLocation } from "../../src/endpoints/GetAllLocations";
 import { finishEndpointTest, initialise } from "../setup";
 
 const GetAllLocations = suite("GetAllLocations");
@@ -25,7 +25,7 @@ GetAllLocations("Is data returned", async () => {
 });
 
 GetAllLocations("Is data an array", () => {
-	assert.instance(response, Array);
+    assert.instance(response, Array);
 });
 
 GetAllLocations.run();

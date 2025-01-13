@@ -1,6 +1,6 @@
 import { suite } from "uvu";
 import * as assert from "uvu/assert";
-import { CompassUserDetails } from "../../src/endpoints/GetUserDetails";
+import type { CompassUserDetails } from "../../src/endpoints/GetUserDetails";
 import { finishEndpointTest, initialise } from "../setup";
 
 const GetUserDetails = suite("GetUserDetails");

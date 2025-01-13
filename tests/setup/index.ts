@@ -20,7 +20,7 @@ export function finishEndpointTest() {
     --totalEndpointTests;
     if (totalEndpointTests === 0) {
         // Close the instance:
-        global.compass["browser"].close();
+        if (global.compass["browser"]) global.compass["browser"].close();
     }
 }
 

@@ -69,11 +69,11 @@ export class CompassClient {
     /**
      * The Puppeteer browser instance.
      */
-    private browser: Browser;
+    private browser: Browser | null = null;
     /**
      * The primary page used for making requests.
      */
-    private page: Page;
+    private page: Page | null = null;
 
     /**
      * Constructs a new CompassClient instance. Note that cookies is an optional
@@ -206,7 +206,7 @@ export class CompassClient {
         }
 
         // Set the cookies in the browser:
-        await this.browser.setCookie(...this.cookies);
+        if (this.browser) await this.browser.setCookie(...this.cookies);
 
         return this;
     }
@@ -230,6 +230,10 @@ export class CompassClient {
             // Initialise the browser, if not already done:
             await this.initialise();
         }
+
+        // Check if the browser has been initialised:
+        if (!this.browser || !this.page)
+            throw new Error("Failed to initialise the browser.");
 
         const cookies = await fetchCookies({
             username,
@@ -291,8 +295,13 @@ export class CompassClient {
             await this.initialise();
         }
 
+        // Check if the cookies have been set:
         if (!this.cookies || !this.cookies.length)
             throw new Error("Cookies must be set before making requests.");
+
+        // Check if the browser has been initialised:
+        if (!this.browser || !this.page)
+            throw new Error("Failed to initialise the browser.");
 
         // Set the cookies in the browser if they haven't been set:
         if (!this.hasSetCookies) {
@@ -328,7 +337,6 @@ export class CompassClient {
         const response = await this.page.evaluate(
             (url: string, method: string, body: any) => {
                 return fetch(url, {
-                    cache: "default",
                     credentials: "include",
                     headers: {
                         Accept: "*/*",
