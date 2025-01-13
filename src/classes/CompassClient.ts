@@ -6,6 +6,7 @@ import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
 import GetAllLocations from "../endpoints/GetAllLocations";
 import GetUserDetails from "../endpoints/GetUserDetails";
+import GetCalendarEvents from "../endpoints/GetCalendarEvents";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
@@ -307,12 +308,14 @@ export class CompassClient {
         }
 
         // Get the user ID if not already set:
-        if(this.userID === -1) {
-            const userId = await this["page"].evaluate("window?.Compass?.organisationUserId");
-            if(!Number.isInteger(userId)) {
+        if (this.userID === -1) {
+            const userId = await this["page"].evaluate(
+                "window?.Compass?.organisationUserId"
+            );
+            if (!Number.isInteger(userId)) {
                 throw new Error("Could not find the user ID");
             }
-            
+
             this.userID = userId as number;
         }
 
@@ -348,4 +351,5 @@ export class CompassClient {
 
     public getAllLocations = GetAllLocations;
     public getUserDetails = GetUserDetails;
+    public getCalendarEvents = GetCalendarEvents;
 }
