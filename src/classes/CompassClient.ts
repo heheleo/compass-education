@@ -6,6 +6,7 @@ import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
 import GetAllLocations from "../endpoints/GetAllLocations";
 import GetUserDetails from "../endpoints/GetUserDetails";
+import GetUserID from "../endpoints/GetUserId";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
@@ -301,30 +302,38 @@ export class CompassClient {
                 waitUntil: "domcontentloaded",
             });
         }
+
         this.baseURL = this.page.url();
 
         // Construct the URL:
         const url = new URL(endpoint, this.baseURL).toString();
 
         // Make the request using the browser:
-        const response = await this.page.evaluate((url: string) => {
-            return fetch(url, {
-                cache: "default",
-                credentials: "include",
-                headers: {
-                    Accept: "*/*",
-                    "Accept-Language": "en-AU,en;q=0.9",
-                },
-                method,
-                mode: "cors",
-                redirect: "follow",
-                body,
-            }).then((a) => a.json());
-        }, url);
+        const response = await this.page.evaluate(
+            (url: string, method: string, body: any) => {
+                return fetch(url, {
+                    cache: "default",
+                    credentials: "include",
+                    headers: {
+                        Accept: "*/*",
+                        "Accept-Language": "en-AU,en;q=0.9",
+                        "Content-Type": "application/json",
+                    },
+                    method,
+                    mode: "cors",
+                    redirect: "follow",
+                    body,
+                }).then((a) => a.json());
+            },
+            url,
+            method,
+            JSON.stringify(body)
+        );
 
         return response;
     }
 
     public getAllLocations = GetAllLocations;
+    public getUserID = GetUserID;
     public getUserDetails = GetUserDetails;
 }
