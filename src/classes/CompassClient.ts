@@ -23,7 +23,7 @@ interface CompassClientConstructorParams {
      * The cookies of the logged in Compass session. This is required to pass
      * Compass's security checks. This accepts a list of cookies in the format
      * of:
-     * - Array of serialised cookies (e.g. ["cookie1=value1; cookie2=value2"])
+     * - Array of serialised cookies (e.g. ["cookie1=value1", "cookie2=value2"])
      * - Array of Puppeteer {@link Cookie}
      *
      * **If you do not have any cookies, fetch the cookies with credentials
