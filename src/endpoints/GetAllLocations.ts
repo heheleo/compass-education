@@ -2,12 +2,6 @@ import { CompassClient } from "../classes/CompassClient";
 
 export interface CompassLocation {
     /**
-     * The type of the location.
-     * All possible values of this field have not been researched yet,
-     * and the meaning may also vary.
-     */
-    __type: string;
-    /**
      * Whether the location is archived.
      */
     archived: boolean;
@@ -56,7 +50,6 @@ export default async function GetAllLocations(
     const transformed = locations.map(
         (location: any) =>
             ({
-                __type: location?.__type,
                 archived: location?.archived,
                 building: location?.building || null,
                 id: location?.id,
