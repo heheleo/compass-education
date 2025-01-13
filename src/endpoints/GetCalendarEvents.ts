@@ -1,8 +1,7 @@
 import { CompassClient } from "../classes/CompassClient";
-import { CompassLocation } from "./GetAllLocations";
 
 /**
- * This is not the same as {@link CompassLocation}. It contains less information.
+ * This is not the same as CompassLocation. It contains less information.
  */
 export interface CompassCalendarEventLocation {
     /**
@@ -173,19 +172,23 @@ export default async function GetCalendarEvents(
     const transformed: CompassCalendarEvent[] = [];
     for (const event of data) {
         const locations: CompassCalendarEventLocation[] = [];
-        for (const location of event?.locations) {
-            locations.push({
-                locationID: location?.locationID ?? null,
-                locationName: location?.locationName ?? null,
-            });
+        if(event?.locations && Array.isArray(event.locations)) {
+            for (const location of event.locations) {
+                locations.push({
+                    locationID: location?.locationID ?? null,
+                    locationName: location?.locationName ?? null,
+                });
+            }
         }
 
         const managers: CompassCalendarEventManager[] = [];
-        for (const manager of event?.managers) {
-            managers.push({
-                managerUserID: manager?.managerUserID ?? null,
-                managerIdentifier: manager?.managerImportIdentifier ?? null,
-            });
+        if(event?.managers && Array.isArray(event.managers)) {
+            for (const manager of event.managers) {
+                managers.push({
+                    managerUserID: manager?.managerUserID ?? null,
+                    managerIdentifier: manager?.managerImportIdentifier ?? null,
+                });
+            }
         }
 
         transformed.push({
