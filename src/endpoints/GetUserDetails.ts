@@ -20,7 +20,7 @@ export interface CompassUserDetails {
     /**
      * The Compass ID of the user.
      */
-    compassId: string | null;
+    compassID: string | null;
     /**
      * The code of the user. This is likely a unique identifier within the school.
      * @example "ABC-0000"
@@ -99,7 +99,7 @@ export default async function GetAllLocations(
         verboseAge: info?.age,
         birthday: info?.birthday,
         gender: info?.gender,
-        compassId: info?.userCompassPersonId,
+        compassID: info?.userCompassPersonId,
         displayCode: info?.userDisplayCode,
         email: info?.userEmail,
         firstName: info?.userFirstName,
