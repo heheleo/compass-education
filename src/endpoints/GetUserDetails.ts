@@ -79,7 +79,7 @@ export interface CompassUserDetails {
  * @returns {Promise<CompassUserDetails>} the user details
  */
 export default async function GetAllLocations(
-    this: CompassClient,
+    this: CompassClient
 ): Promise<CompassUserDetails> {
     const request = await this.request(
         "/Services/User.svc/GetUserDetailsBlobByUserId",
@@ -95,23 +95,23 @@ export default async function GetAllLocations(
 
     const info = request.d;
     const transformed: CompassUserDetails = {
-        verboseAge: info?.age,
-        birthday: info?.birthday,
-        gender: info?.gender,
-        compassID: info?.userCompassPersonId,
-        displayCode: info?.userDisplayCode,
-        email: info?.userEmail,
-        firstName: info?.userFirstName,
-        formGroup: info?.userFormGroup,
-        fullName: info?.userFullName,
-        lastName: info?.userLastName,
-        house: info?.userHouse,
+        verboseAge: info?.age ?? null,
+        birthday: info?.birthday ?? null,
+        gender: info?.gender ?? null,
+        compassID: info?.userCompassPersonId ?? null,
+        displayCode: info?.userDisplayCode ?? null,
+        email: info?.userEmail ?? null,
+        firstName: info?.userFirstName ?? null,
+        formGroup: info?.userFormGroup ?? null,
+        fullName: info?.userFullName ?? null,
+        lastName: info?.userLastName ?? null,
+        house: info?.userHouse ?? null,
         photoURL: info?.userPhotoPath
             ? new URL(info?.userPhotoPath, this.baseURL).toString()
             : null,
-        preferredName: info?.userPreferredName,
-        preferredLastName: info?.userPreferredLastName,
-        yearLevel: info?.userYearLevelId,
+        preferredName: info?.userPreferredName ?? null,
+        preferredLastName: info?.userPreferredLastName ?? null,
+        yearLevel: info?.userYearLevelId ?? null,
     };
 
     return transformed;

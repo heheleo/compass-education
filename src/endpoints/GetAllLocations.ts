@@ -4,7 +4,7 @@ export interface CompassLocation {
     /**
      * Whether the location is archived.
      */
-    archived: boolean;
+    archived: boolean | null;
     /**
      * The building of the location.
      */
@@ -12,22 +12,22 @@ export interface CompassLocation {
     /**
      * The ID of the location.
      */
-    id: number;
+    id: number | null;
     /**
      * A more verbose name of the location.
      * @example "Court 1"
      */
-    longName: string;
+    longName: string | null;
     /**
      * The name of the location. Normally short and concise.
      * @example "C1"
      */
-    name: string;
+    name: string | null;
     /**
      * This is likely an exact copy of the name field,
      * however, it is not confirmed.
      */
-    roomName: string;
+    roomName: string | null;
 }
 
 /**
@@ -50,12 +50,12 @@ export default async function GetAllLocations(
     const transformed = locations.map(
         (location: any) =>
             ({
-                archived: location?.archived,
+                archived: location?.archived ?? null,
                 building: location?.building || null,
-                id: location?.id,
-                longName: location?.longName,
-                name: location?.n,
-                roomName: location?.roomName,
+                id: location?.id ?? null,
+                longName: location?.longName ?? null,
+                name: location?.n ?? null,
+                roomName: location?.roomName ?? null,
             }) as CompassLocation
     );
 
