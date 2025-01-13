@@ -31,57 +31,59 @@ import { CompassClient } from 'compass-education';
 const compass = new CompassClient("xxx.compass.education");
 
 (async () => {
-	// Log into compass:
-	await compass
-		.login({
-			username: "username",
-			password: "password"
-		})
+  // Log into compass:
+  await compass
+    .login({
+      username: "username",
+      password: "password"
+    })
 
-	// Fetch my timetable for today:
-	const todayTimetable = await compass.getCalendarEvents();
+  // Fetch my timetable for today:
+  const todayTimetable = await compass.getCalendarEvents();
 
-	// Fetch my timetable for a specific day:
-	const specificDayTimetable = await compass.getCalendarEvents({
-		startDate: "2022-01-01", // Can be a string
-		endDate: new Date("2022-01-01"), // Or a Date object!
-	});
+  // Fetch my timetable for a specific day:
+  const specificDayTimetable = await compass.getCalendarEvents({
+    startDate: "2022-01-01", // Can be a string
+    endDate: new Date("2022-01-01"), // Or a Date object!
+  });
 
-	// What is my name?
-	const myName = await compass.getUserDetails().fullName;
+  // What is my name?
+  const myName = await compass.getUserDetails().fullName;
 })();
 
 ```
 
 <details open>
-	<summary>Example output of timetable for above example</summary>
+  <summary>Example output of timetable for above example</summary>
 
-	[
-		{
-			subjectLongName: 'Science',
-			subjectTitle: '3SCIH',
-			rollMarked: true,
-			allDay: false,
-			start: '2022-05-17T22:45:00Z',
-			finish: '2022-05-17T23:20:00Z',
-			longTitle: '10:45: 1 - 3SCIH - B33 - JHD',
-			longTitleWithoutTime: '1 - 3SCIH - B33 - JHD',
-			period: 1,
-			managers: [
-				{
-					managerUserID: 123456,
-					managerIdentifier: 'JHD'
-				}
-			],
-			locations: [
-				{
-					locationID: 123456,
-					locationName: 'B33'
-				}
-			]
-		},
-		...
-	]
+  ```ts
+  [
+    {
+      subjectLongName: 'Science',
+      subjectTitle: '3SCIH',
+      rollMarked: true,
+      allDay: false,
+      start: '2022-05-17T22:45:00Z',
+      finish: '2022-05-17T23:20:00Z',
+      longTitle: '10:45: 1 - 3SCIH - B33 - JHD',
+      longTitleWithoutTime: '1 - 3SCIH - B33 - JHD',
+      period: 1,
+      managers: [
+        {
+          managerUserID: 123456,
+          managerIdentifier: 'JHD'
+        }
+      ],
+      locations: [
+        {
+          locationID: 123456,
+          locationName: 'B33'
+        }
+      ]
+    },
+    ...
+  ]
+  ```
 </details>
 
 ## Endpoint Status
