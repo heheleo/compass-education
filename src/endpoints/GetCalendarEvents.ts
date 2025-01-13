@@ -172,7 +172,7 @@ export default async function GetCalendarEvents(
     const transformed: CompassCalendarEvent[] = [];
     for (const event of data) {
         const locations: CompassCalendarEventLocation[] = [];
-        if(event?.locations && Array.isArray(event.locations)) {
+        if (event?.locations && Array.isArray(event.locations)) {
             for (const location of event.locations) {
                 locations.push({
                     locationID: location?.locationID ?? null,
@@ -182,7 +182,7 @@ export default async function GetCalendarEvents(
         }
 
         const managers: CompassCalendarEventManager[] = [];
-        if(event?.managers && Array.isArray(event.managers)) {
+        if (event?.managers && Array.isArray(event.managers)) {
             for (const manager of event.managers) {
                 managers.push({
                     managerUserID: manager?.managerUserID ?? null,
