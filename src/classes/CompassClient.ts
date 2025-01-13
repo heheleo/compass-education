@@ -102,7 +102,7 @@ export class CompassClient {
         // Check if the argument is a string:
         if (typeof arg === "string") {
             // The argument is a base URL:
-            params.baseURL = arg;
+            params.baseURL = arg.startsWith("https") ? arg : `https://${arg}`;
         } else {
             // The argument is a params object:
             params = arg;
@@ -165,7 +165,10 @@ export class CompassClient {
      * @returns {CompassClient} the instance of the client
      */
     public setBaseURL(baseURL: string) {
-        this.baseURL = baseURL;
+        // Check if base URL contains the protocol:
+        this.baseURL = baseURL.startsWith("https")
+            ? baseURL
+            : `https://${baseURL}`;
         return this;
     }
 
@@ -294,10 +297,11 @@ export class CompassClient {
 
         // Go to the main page, if not already there:
         if (this.page.url() !== this.baseURL) {
-            await this.page.goto(`${this.baseURL}`, {
+            await this.page.goto(this.baseURL, {
                 waitUntil: "domcontentloaded",
             });
         }
+        this.baseURL = this.page.url();
 
         // Construct the URL:
         const url = new URL(endpoint, this.baseURL).toString();
