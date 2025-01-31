@@ -26,6 +26,14 @@
 		"compass-education",
 		"scraper"
 	],
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/heheleo/compass-education.git"
+	},
+	"type": "module",
 	"author": "heheleo",
 	"license": "MIT",
 	"devDependencies": {
