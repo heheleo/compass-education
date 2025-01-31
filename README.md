@@ -1,83 +1,123 @@
-## :exclamation: Due to additional checks implemented by Compass, programmically logging into Compass is now impossible without browser emulation. Therefore, I will be sunsetting this project.
-
 # compass-education
 
-A package to interact with Compass, a school management system in Australia.
+A package to interact with [Compass Education](https://compass.education), a popular school management system in Australia.
 
----
+## ❗ Disclaimer ❗
 
-### :exclamation: Disclaimer - This package is unofficial and does not support all schools using Compass. 
+This package is unofficial, and is not affiliated with Compass Education in any way. It is not endorsed by Compass Education, and may break at any time. It also does not support all schools. Use at your own risk.
 
 ## Installation
-```
-npm i compass-education
+
+Requires Node 18.0.0 or higher for native fetch support.
+
+Please follow [Puppeteer's system requirements](https://pptr.dev/guides/system-requirements).
+
+```bash
+# npm users
+npm install compass-education
+# yarn users
+yarn add compass-education
+# pnpm users
+pnpm add compass-education
+# bun users
+bun add compass-education
 ```
 
-## Get Started
-[Read the documentation here!](https://heyimleo.gitbook.io/compass-education/)
+## Example 
+```ts
+import { CompassClient } from 'compass-education';
 
-A basic example to fetch all classes for the day.
-```
-const Compass = require("compass-education");
-const Client = new Compass.Client("https://xx.compass.education");
+// Create a new client instance:
+const compass = new CompassClient("xxx.compass.education");
 
 (async () => {
-	await Client.login("Username", "Password");
-	const classes = await Client.getClasses();
-	// example output below
+  // Log into compass:
+  await compass
+    .login({
+      username: "username",
+      password: "password"
+    })
+
+  // Fetch my timetable for today:
+  const todayTimetable = await compass.getCalendarEvents();
+
+  // Fetch my timetable for a specific day:
+  const specificDayTimetable = await compass.getCalendarEvents({
+    startDate: "2022-01-01", // Can be a string
+    endDate: new Date("2022-01-01"), // Or a Date object!
+  });
+
+  // What is my name?
+  const myName = await compass.getUserDetails().fullName;
 })();
+
 ```
 
 <details open>
-	<summary>Example output of classes</summary>
+  <summary>Example output of timetable for above example</summary>
 
-	[
-		{
-			title: 'XSCIH',
-			rollMarked: true,
-			start: '2022-05-17T22:45:00Z',
-			finish: '2022-05-18T00:00:00Z',
-			activityId: 80166,
-			instanceId: 'x', // censored
-			longTitle: '10:45: 1 - XSCIH - B33 - X',
-			longTitleWithoutTime: '1 - XSCIH - B33 - X',
-			classroom: 'B33',
-			teacher: 'X' // censored
-		},
-		{
-			title: 'XPEHH',
-			rollMarked: true,
-			start: '2022-05-18T00:05:00Z',
-			finish: '2022-05-18T01:20:00Z',
-			activityId: 80146,
-			instanceId: '80146180520220005',
-			longTitle: '12:05: 2 - XPEHH - S1F - TRI',
-			longTitleWithoutTime: '2 - XPEHH - S1F - TRI',
-			classroom: 'S1F',
-			teacher: 'X'
-		},
-		...	2 more	
-	]
-
+  ```ts
+  [
+    {
+      subjectLongName: 'Science',
+      subjectTitle: '3SCIH',
+      rollMarked: true,
+      allDay: false,
+      start: '2022-05-17T22:45:00Z',
+      finish: '2022-05-17T23:20:00Z',
+      longTitle: '10:45: 1 - 3SCIH - B33 - JHD',
+      longTitleWithoutTime: '1 - 3SCIH - B33 - JHD',
+      period: 1,
+      managers: [
+        {
+          managerUserID: 123456,
+          managerIdentifier: 'JHD'
+        }
+      ],
+      locations: [
+        {
+          locationID: 123456,
+          locationName: 'B33'
+        }
+      ]
+    },
+    ...
+  ]
+  ```
 </details>
 
-## Motivation
+## Endpoint Status
+| Endpoint                                             | Implementation | Tests | Description                                           |
+|------------------------------------------------------|----------------|-------|-------------------------------------------------------|
+| GetCalendarEvents                                    | 🟢              | 🟡     | Timetable data                                        |
+| GetUserDetails                                       | 🟢              | 🟡     | Detailed user data                                    |
+| GetAllLocations                                      | 🟢              | 🟡     | List of all locations                                 |
+| GetAllYearLevels                                     | 🔴              | 🔴     | List of all year levels                               |
+| GetAllTerms                                          | 🔴              | 🔴     | List of school defined terms with dates               |
+| GetFeedOptions                                       | 🔴              | 🔴     | School news feed data                                 |
+| GetAllStaff                                          | 🔴              | 🔴     | List of all staff                                     |
+| GetGroupActiviesList (they spelled Activities wrong) | 🔴              | 🔴     | List of all possible group activities e.g. detentions |
+| GetAllCampuses                                       | 🔴              | 🔴     | List of all school campuses                           |
 
-I needed a way to get my classes programmatically, and thats how this project was born.
+🟢 = Done
+🟡 = Partially done
+🔴 = Not done
 
-I have worked with other API wrappers of Compass ages ago, but they were mainly based on Puppeteer. This caused a lack of features and also was a bit slow. Using services (basically Compass endpoints), it made this project faster and packed more features than other projects. 
+## Documentation
+Coming soon.
 
-[Here](https://github.com/tascord/compass-edu) you can check out [tascord](https://github.com/tascord/)'s original library "compass-edu" based on Puppeteer.
+## How does this work?
 
-Note: This library does not work for every school. If it doesn't, feel free to tweak the code a little or submit an issue, and maybe we can find some way to deal with it.
+Compass unfortunately patched the original method of directly using endpoints to fetch data (now they use Cloudflare and it seems that every route is proxied). As a result, version 1 was sunsetted.
 
-## Contributions
+2.0.0+ now uses Puppeteer to bypass Cloudflare. This is way slower (10 seconds) but it is only slow for the initial login. The subsequent endpoint requests are much faster as we use the session cookies to make direct requests. If anyone has a better solution without needing browser emulation, please let me know.
 
-Since this library is not tested, and does not work for different schools, contributions are very much welcome. Anything from issues, pull requests will always help me out. 
+## Contributing
 
-Also, I am not a NodeJS professional - feel free to roast my code. 
+Issues and pull	requests are welcome!
 
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information. We would love it if you could contribute to this project!
 
 ## License
 
-This library uses the GPL-3.0 license.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
