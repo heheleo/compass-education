@@ -121,13 +121,14 @@ Below are some ideas that this package could be used for:
   - Fetch the data and generate statistics or graphs to help you understand your school life better.
   - I have seen my friends use [Notion](https://www.notion.com) to display their timetable and assignments in a more visually appealing way. They have an [API](https://developers.notion.com).
 - Display data in a custom way:
-  - Fetch the data and display it in a way that suits you better than the Compass interface (you probably only need to query once per day for classes, and once a month for assignments).
+  - Fetch the data and display it in a way that suits you better than the Compass interface (you probably only need to query once per day for classes, and once a month for assignments)
     - This saves time, especially if your school has *terrible* Internet.
     - I personally display my classes in a *status bar* through [Sketchybar](https://felixkratz.github.io/SketchyBar/). Linux users may use [Polybar](https://polybar.github.io)
-    - <details>
-      <summary>Click for an example of my status bar</summary>
-      ![Example of status bar](.github/assets/bar.png)
-    </details>
+      <details>
+        <summary>Click for an example of my status bar</summary>
+        
+        ![screenshot](.github/assets/bar.png)
+      </details>
 
   - Displaying assignments in a Kanban board.
   - Writing a CLI app that displays your next class, making it easier to know where you need to be. e.g. `nextclass`
