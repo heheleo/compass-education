@@ -29,6 +29,10 @@
 	"files": [
 		"dist"
 	],
+	"engines": {
+		"node": ">=18",
+		"pnpm": ">=10"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/heheleo/compass-education.git"
