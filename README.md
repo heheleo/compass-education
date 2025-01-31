@@ -113,6 +113,26 @@ Compass now uses Cloudflare to proxy every route. As a result, directly using en
 
 2.0.0+ now uses Puppeteer to bypass Cloudflare. This is way slower (around 8 seconds, depending on your machine) but it is only slow due to browser startup and login. The subsequent endpoint requests are much faster as session cookies are used to make direct endpoint requests. If you have a better solution without needing browser emulation, start a discussion through the Issues tab!
 
+## Project Ideas
+Below are some ideas that this package could be used for:
+- Building a [Discord](https://discord.com)/[Microsoft Teams](https://www.microsoft.com/microsoft-teams/)/[Guilded](https://www.guilded.gg) bot that fetches timetable data for students:
+  - This may be helpful for students who use these social media platforms and want to directly reference their timetable or a specific assignment in a conversation.
+- Aggregating data by yourself:
+  - Fetch the data and generate statistics or graphs to help you understand your school life better.
+  - I have seen my friends use [Notion](https://www.notion.com) to display their timetable and assignments in a more visually appealing way. They have an [API](https://developers.notion.com).
+- Display data in a custom way:
+  - Fetch the data and display it in a way that suits you better than the Compass interface (you probably only need to query once per day for classes, and once a month for assignments).
+    - This saves time, especially if your school has *terrible* Internet.
+    - I personally display my classes in a *status bar* through [Sketchybar](https://felixkratz.github.io/SketchyBar/). Linux users may use [Polybar](https://polybar.github.io)
+    - <details>
+      <summary>Click for an example of my status bar</summary>
+      ![Example of status bar](.github/assets/bar.png)
+    </details>
+
+  - Displaying assignments in a Kanban board.
+  - Writing a CLI app that displays your next class, making it easier to know where you need to be. e.g. `nextclass`
+  - Loading classes/assignments into task management systems (for example [Todoist](https://todoist.com), [Microsoft To Do](https://to-do.microsoft.com), [TickTick](https://ticktick.com) etc.). I personally use [Things 3](https://culturedcode.com/things/).
+
 ## Contributing
 
 Issues and pull	requests are welcome!
