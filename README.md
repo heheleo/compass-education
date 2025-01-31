@@ -109,9 +109,9 @@ Coming soon.
 
 ## How does this work?
 
-Compass unfortunately patched the original method of directly using endpoints to fetch data (now they use Cloudflare and it seems that every route is proxied). As a result, version 1 was sunsetted.
+Compass now uses Cloudflare to proxy every route. As a result, directly using endpoints to fetch data is now impossible. As a result, version 1 was sunsetted.
 
-2.0.0+ now uses Puppeteer to bypass Cloudflare. This is way slower (10 seconds) but it is only slow for the initial login. The subsequent endpoint requests are much faster as we use the session cookies to make direct requests. If anyone has a better solution without needing browser emulation, please let me know.
+2.0.0+ now uses Puppeteer to bypass Cloudflare. This is way slower (around 8 seconds, depending on your machine) but it is only slow due to browser startup and login. The subsequent endpoint requests are much faster as session cookies are used to make direct endpoint requests. If you have a better solution without needing browser emulation, start a discussion through the Issues tab!
 
 ## Contributing
 
