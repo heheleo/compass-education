@@ -129,7 +129,6 @@ Below are some ideas that this package could be used for:
         
         ![screenshot](.github/assets/bar.png)
       </details>
-
   - Displaying assignments in a Kanban board.
   - Writing a CLI app that displays your next class, making it easier to know where you need to be. e.g. `nextclass`
   - Loading classes/assignments into task management systems (for example [Todoist](https://todoist.com), [Microsoft To Do](https://to-do.microsoft.com), [TickTick](https://ticktick.com) etc.). I personally use [Things 3](https://culturedcode.com/things/).
