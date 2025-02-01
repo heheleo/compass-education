@@ -9,6 +9,7 @@ import GetUserDetails from "../endpoints/GetUserDetails";
 import GetCalendarEvents from "../endpoints/GetCalendarEvents";
 import GetAllYearLevels from "../endpoints/GetAllYearLevels";
 import GetAllTerms from "../endpoints/GetAllTerms";
+import GetFeedItems from "../endpoints/GetFeedITems";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
@@ -387,4 +388,5 @@ export class CompassClient {
     public getCalendarEvents = GetCalendarEvents;
     public getAllYearLevels = GetAllYearLevels;
     public getAllTerms = GetAllTerms;
+    public getFeedItems = GetFeedItems;
 }

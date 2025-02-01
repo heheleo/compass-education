@@ -100,7 +100,7 @@ const compass = new CompassClient("xxx.compass.education");
 | GetAllLocations                                      | 🟢              | 🟡     | List of all locations                                 |
 | GetAllYearLevels                                     | 🟢              | 🟡     | List of all year levels                               |
 | GetAllTerms                                          | 🟢              | 🟡     | List of school defined terms with dates               |
-| GetFeedOptions                                       | 🔴              | 🔴     | School news feed data                                 |
+| GetFeedOptions                                       | 🟢              | 🟡     | School news feed data                                 |
 | GetAllStaff                                          | 🔴              | 🔴     | List of all staff                                     |
 | GetGroupActiviesList (they spelled Activities wrong) | 🔴              | 🔴     | List of all possible group activities e.g. detentions |
 | GetAllCampuses                                       | 🔴              | 🔴     | List of all school campuses                           |
