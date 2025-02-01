@@ -36,19 +36,25 @@ const compass = new CompassClient("xxx.compass.education");
     .login({
       username: "username",
       password: "password"
-    })
+    });
 
   // Fetch my timetable for today:
   const todayTimetable = await compass.getCalendarEvents();
+  console.log(todayTimetable);
 
   // Fetch my timetable for a specific day:
   const specificDayTimetable = await compass.getCalendarEvents({
-    startDate: "2022-01-01", // Can be a string
-    endDate: new Date("2022-01-01"), // Or a Date object!
+    startDate: "2022-01-01", // Can also be a Date object.
+    endDate: "2022-01-01" // Can also be a Date object.
   });
+  console.log(specificDayTimetable);
 
   // What is my name?
-  const myName = await compass.getUserDetails().fullName;
+  const userDetails = await compass.getUserDetails();
+  console.log(userDetails.fullName);
+
+  // Terminate the session:
+  await compass.logout();
 })();
 
 ```
