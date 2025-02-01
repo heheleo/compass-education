@@ -41,7 +41,7 @@ export interface CompassCalendarEvent {
     /**
      * The date the event ends.
      */
-    end: Date | null;
+    finish: Date | null;
     /**
      * The location(s) of the event.
      */
@@ -194,7 +194,7 @@ export default async function GetCalendarEvents(
         transformed.push({
             allDay: event?.allDay ?? null,
             start: event?.start ? new Date(event.start) : null,
-            end: event?.end ? new Date(event.end) : null,
+            finish: event?.finish ? new Date(event.finish) : null,
             locations,
             longTitle: event?.longTitle ?? null,
             longTitleWithoutTime: event?.longTitleWithoutTime ?? null,
