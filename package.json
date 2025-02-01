@@ -19,7 +19,8 @@
 		"build": "pnpm tsup",
 		"lint": "pnpm oxlint src --fix",
 		"format": "pnpm prettier --write \"src/**/*.ts\"",
-		"test": "pnpm uvu tests -b -i setup -r tsm"
+		"test": "pnpm uvu tests -b -i setup -r tsm",
+		"prepare": "husky"
 	},
 	"keywords": [
 		"compass",
@@ -44,9 +45,12 @@
 	"author": "heheleo",
 	"license": "MIT",
 	"devDependencies": {
+		"@commitlint/cli": "^19.6.1",
+		"@commitlint/config-conventional": "^19.6.0",
 		"@types/node": "^22.10.5",
 		"@types/user-agents": "^1.0.4",
 		"dotenv": "^16.4.7",
+		"husky": "^9.1.7",
 		"oxlint": "^0.15.5",
 		"prettier": "^3.4.2",
 		"tsm": "^2.3.0",
