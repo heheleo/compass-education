@@ -10,6 +10,7 @@ const baseOptions: Options = {
     sourcemap: true,
     target: "es2020",
     tsconfig: "tsconfig.json",
+    keepNames: true,
     treeshake: true,
 };
 
