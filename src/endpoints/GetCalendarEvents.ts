@@ -165,7 +165,7 @@ export default async function GetCalendarEvents(
     );
 
     if (!request || !request?.d) {
-        throw new Error("Failed to fetch user details.");
+        throw new Error("Failed to fetch calendar events.");
     }
 
     const data = request.d;
