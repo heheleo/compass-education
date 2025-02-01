@@ -361,7 +361,7 @@ export class CompassClient {
      * Terminates the browser instance, which results in the client being unable
      * to make subsequent requests to Compass's endpoints.
      */
-    public async terminate() {
+    public async logout() {
         // Check if the browser has been initialised:
         if (!this.browser) {
             // Throw an error if the browser has not been initialised:
