@@ -357,6 +357,23 @@ export class CompassClient {
         return response;
     }
 
+    /**
+     * Terminates the browser instance, which results in the client being unable
+     * to make subsequent requests to Compass's endpoints.
+     */
+    public async terminate() {
+        // Check if the browser has been initialised:
+        if (!this.browser) {
+            // Throw an error if the browser has not been initialised:
+            throw new Error(
+                "Browser has not been initialised, but you are trying to terminate it."
+            );
+        }
+
+        // Close the browser:
+        await this.browser.close();
+    }
+
     public getAllLocations = GetAllLocations;
     public getUserDetails = GetUserDetails;
     public getCalendarEvents = GetCalendarEvents;
