@@ -34,7 +34,10 @@ This project uses [uvu](https://github.com/lukeed/uvu/) for testing. To run the 
 pnpm test
 ```
 
-Note that tests are not definitive as endpoints may work differently for different schools.
+### Disclaimer
+Tests implemented are not strict as endpoints may work differently for different schools. The tests **only** check if the endpoints return valid data, but not schema-validated data.
+
+As a result, if a test fails, this may be due to the fact **that the endpoint is not available for the school** you are testing with, or the endpoint returns different data (although unlikely).
 
 ## Linting & Formatting
 
