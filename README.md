@@ -95,19 +95,19 @@ const compass = new CompassClient("xxx.compass.education");
 ## Endpoint Status
 | Endpoint                                             | Implementation | Tests | Description                                           |
 |------------------------------------------------------|----------------|-------|-------------------------------------------------------|
-| GetCalendarEvents                                    | 🟢              | 🟡     | Timetable data                                        |
-| GetUserDetails                                       | 🟢              | 🟡     | Detailed user data                                    |
-| GetAllLocations                                      | 🟢              | 🟡     | List of all locations                                 |
-| GetAllYearLevels                                     | 🟢              | 🟡     | List of all year levels                               |
-| GetAllTerms                                          | 🟢              | 🟡     | List of school defined terms with dates               |
-| GetFeedOptions                                       | 🟢              | 🟡     | School news feed data                                 |
+| GetCalendarEvents                                    | 🟢              | 🟢     | Timetable data                                        |
+| GetUserDetails                                       | 🟢              | 🟢     | Detailed user data                                    |
+| GetAllLocations                                      | 🟢              | 🟢     | List of all locations                                 |
+| GetAllYearLevels                                     | 🟢              | 🟢     | List of all year levels                               |
+| GetAllTerms                                          | 🟢              | 🟢     | List of school defined terms with dates               |
+| GetFeedOptions                                       | 🟢              | 🟢     | School news feed data                                 |
 | GetAllStaff                                          | 🔴              | 🔴     | List of all staff                                     |
 | GetGroupActiviesList (they spelled Activities wrong) | 🔴              | 🔴     | List of all possible group activities e.g. detentions |
 | GetAllLearningTasksByUserId | 🔴              | 🔴     | List all learning tasks (e.g. assignments, homework) |
 | GetAllCampuses                                       | 🔴              | 🔴     | List of all school campuses                           |
 
 🟢 = Done
-🟡 = Partially done (and passing)
+🟡 = Partially done
 🔴 = Not done
 
 ## Documentation
