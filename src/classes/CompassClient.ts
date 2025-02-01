@@ -252,6 +252,12 @@ export class CompassClient {
         await this.browser.setCookie(...cookies);
         this.cookies = cookies;
         this.hasSetCookies = true;
+
+        // In order for subsequent requests to work, we need to perform these
+        // specific requests to Compass's endpoints.
+        // I have no idea why this is necessary, but it is.
+        await this.getAllLocations();
+        await this.getUserDetails();
     }
 
     /**
