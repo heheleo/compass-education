@@ -37,6 +37,9 @@
 		"type": "git",
 		"url": "git+https://github.com/heheleo/compass-education.git"
 	},
+	"bugs": {
+		"url": "https://github.com/heheleo/compass-education/issues"
+	},
 	"type": "module",
 	"author": "heheleo",
 	"license": "MIT",
