@@ -9,7 +9,7 @@ import GetUserDetails from "../endpoints/GetUserDetails";
 import GetCalendarEvents from "../endpoints/GetCalendarEvents";
 import GetAllYearLevels from "../endpoints/GetAllYearLevels";
 import GetAllTerms from "../endpoints/GetAllTerms";
-import GetFeedItems from "../endpoints/GetFeedITems";
+import GetFeedItems from "../endpoints/GetFeedItems";
 
 puppeteer.use(StealthPlugin());
 puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
