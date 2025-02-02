@@ -60,6 +60,7 @@
 		"uvu": "^0.5.6"
 	},
 	"dependencies": {
+		"puppeteer-extra-plugin-stealth": "^2.11.2",
 		"puppeteer": "^24.0.0"
 	},
 	"pnpm": {
