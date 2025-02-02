@@ -62,8 +62,6 @@
 	"dependencies": {
 		"cookie": "^1.0.2",
 		"puppeteer": "^24.0.0",
-		"puppeteer-extra": "^3.3.6",
-		"puppeteer-extra-plugin-stealth": "^2.11.2",
 		"user-agents": "^1.1.415"
 	},
 	"pnpm": {

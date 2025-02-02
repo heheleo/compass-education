@@ -1,16 +1,13 @@
 import type { Browser, Cookie, Page } from "puppeteer";
-import puppeteer from "puppeteer-extra";
-import StealthPlugin from "puppeteer-extra-plugin-stealth";
+import puppeteer from "puppeteer";
 import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
 import GetAllLocations from "../endpoints/GetAllLocations";
-import GetUserDetails from "../endpoints/GetUserDetails";
-import GetCalendarEvents from "../endpoints/GetCalendarEvents";
-import GetAllYearLevels from "../endpoints/GetAllYearLevels";
 import GetAllTerms from "../endpoints/GetAllTerms";
+import GetAllYearLevels from "../endpoints/GetAllYearLevels";
+import GetCalendarEvents from "../endpoints/GetCalendarEvents";
 import GetFeedItems from "../endpoints/GetFeedItems";
-
-puppeteer.use(StealthPlugin());
+import GetUserDetails from "../endpoints/GetUserDetails";
 
 interface CompassClientConstructorParams {
     /**
