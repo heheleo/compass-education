@@ -2,6 +2,8 @@
 
 A package to interact with [Compass Education](https://compass.education), a popular school management system in Australia.
 
+![NPM Version](https://img.shields.io/npm/v/compass-education?style=for-the-badge&color=red)
+
 ## ❗ Disclaimer ❗
 
 This package is unofficial, and is not affiliated with Compass Education in any way. It is not endorsed by Compass Education, and may break at any time. It also does not support all schools. Use at your own risk.
