@@ -1,6 +1,5 @@
 import type { Browser, Cookie, Page } from "puppeteer";
 import puppeteer from "puppeteer-extra";
-import AdBlockerPlugin from "puppeteer-extra-plugin-adblocker";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import UserAgent from "user-agents";
 import { fetchCookies } from "../cookies";
@@ -12,7 +11,6 @@ import GetAllTerms from "../endpoints/GetAllTerms";
 import GetFeedItems from "../endpoints/GetFeedItems";
 
 puppeteer.use(StealthPlugin());
-puppeteer.use(AdBlockerPlugin({ blockTrackers: true }));
 
 interface CompassClientConstructorParams {
     /**
