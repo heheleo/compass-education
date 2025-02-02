@@ -63,7 +63,9 @@ export default async function GetAllStaff(
                 firstName: staffMember?.fn ?? null,
                 lastName: staffMember?.ln ?? null,
                 fullName: staffMember?.n ?? null,
-                joinDate: staffMember?.start ? new Date(staffMember.start) : null,
+                joinDate: staffMember?.start
+                    ? new Date(staffMember.start)
+                    : null,
             }) as CompassStaff
     );
 
