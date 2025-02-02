@@ -11,15 +11,9 @@ importers:
       puppeteer:
         specifier: ^24.0.0
         version: 24.1.1(typescript@5.7.3)
-      puppeteer-extra:
-        specifier: ^3.3.6
-        version: 3.3.6(puppeteer-core@24.1.1)(puppeteer@24.1.1(typescript@5.7.3))
       puppeteer-extra-plugin-stealth:
         specifier: ^2.11.2
         version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@24.1.1)(puppeteer@24.1.1(typescript@5.7.3)))
-      user-agents:
-        specifier: ^1.1.415
-        version: 1.1.436
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.6.1
@@ -1737,9 +1731,6 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==, tarball: https://registry.npmjs.org/universalify/-/universalify-2.0.1.tgz}
     engines: {node: '>= 10.0.0'}
 
-  user-agents@1.1.436:
-    resolution: {integrity: sha512-W/+bxMWmRXZusqQkDggDstoo4nwa272IOdqZLppn46fTOBjiIId0qOmio6NeHp6Plm16p+cikbSk9D3Cc0ogHQ==, tarball: https://registry.npmjs.org/user-agents/-/user-agents-1.1.436.tgz}
-
   uvu@0.5.6:
     resolution: {integrity: sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==, tarball: https://registry.npmjs.org/uvu/-/uvu-0.5.6.tgz}
     engines: {node: '>=8'}
@@ -3053,6 +3044,7 @@ snapshots:
       puppeteer-core: 24.1.1
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   puppeteer@24.1.1(typescript@5.7.3):
     dependencies:
@@ -3294,10 +3286,6 @@ snapshots:
   unicorn-magic@0.1.0: {}
 
   universalify@2.0.1: {}
-
-  user-agents@1.1.436:
-    dependencies:
-      lodash.clonedeep: 4.5.0
 
   uvu@0.5.6:
     dependencies:
