@@ -18,7 +18,7 @@
 	"scripts": {
 		"build": "pnpm tsup",
 		"lint": "pnpm oxlint src --fix",
-		"format": "pnpm prettier --write \"src/**/*.ts\"",
+		"format": "pnpm prettier --write \"{src,tests}/**/*.ts\"",
 		"test": "pnpm uvu tests -b -i setup -r tsm",
 		"prepare": "husky"
 	},
