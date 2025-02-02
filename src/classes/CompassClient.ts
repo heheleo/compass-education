@@ -149,8 +149,10 @@ export class CompassClient {
         });
         this.page =
             (await this.browser.pages())[0] || (await this.browser.newPage());
+
         // Initialise page user agent:
-        const userAgent = new UserAgent({ deviceCategory: "mobile" });
+        const userAgent =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
         this.page.setUserAgent(userAgent.toString());
 
         if (this.cookies && this.cookies.length) {

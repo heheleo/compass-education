@@ -60,9 +60,7 @@
 		"uvu": "^0.5.6"
 	},
 	"dependencies": {
-		"cookie": "^1.0.2",
-		"puppeteer": "^24.0.0",
-		"user-agents": "^1.1.415"
+		"puppeteer": "^24.0.0"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
