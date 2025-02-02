@@ -102,8 +102,8 @@ const compass = new CompassClient("xxx.compass.education");
 | GetAllTerms                                          | 🟢              | 🟢     | List of school defined terms with dates               |
 | GetFeedOptions                                       | 🟢              | 🟢     | School news feed data                                 |
 | GetAllStaff                                          | 🟢              | 🟢     | List of all staff                                     |
-| GetGroupActiviesList (they spelled Activities wrong) | 🔴              | 🔴     | List of all possible group activities e.g. detentions |
-| GetAllLearningTasksByUserId | 🔴              | 🔴     | List all learning tasks (e.g. assignments, homework) |
+| GetGroupActiviesList (they spelled Activities wrong) | 🟢              | 🟢     | List of all possible group activities e.g. detentions, club sessions, exams |
+| GetAllLearningTasksByUserId                          | 🔴              | 🔴     | List all learning tasks (e.g. assignments, homework) |
 | GetAllCampuses                                       | 🔴              | 🔴     | List of all school campuses                           |
 
 🟢 = Done
