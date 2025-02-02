@@ -11,6 +11,9 @@ importers:
       puppeteer:
         specifier: ^24.0.0
         version: 24.1.1(typescript@5.7.3)
+      puppeteer-extra:
+        specifier: ^3.3.6
+        version: 3.3.6(puppeteer-core@24.1.1)(puppeteer@24.1.1(typescript@5.7.3))
       puppeteer-extra-plugin-stealth:
         specifier: ^2.11.2
         version: 2.11.2(puppeteer-extra@3.3.6(puppeteer-core@24.1.1)(puppeteer@24.1.1(typescript@5.7.3)))
@@ -3044,7 +3047,6 @@ snapshots:
       puppeteer-core: 24.1.1
     transitivePeerDependencies:
       - supports-color
-    optional: true
 
   puppeteer@24.1.1(typescript@5.7.3):
     dependencies:
