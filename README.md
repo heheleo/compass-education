@@ -2,7 +2,7 @@
 
 A package to interact with [Compass Education](https://compass.education), a popular school management system in Australia.
 
-![NPM Version](https://img.shields.io/npm/v/compass-education?style=for-the-badge&color=red)
+[![NPM Version](https://img.shields.io/npm/v/compass-education?style=for-the-badge&color=red)](https://www.npmjs.com/package/compass-education)
 
 ## ❗ Disclaimer ❗
 
