@@ -10,6 +10,7 @@ import GetAllTerms from "../endpoints/GetAllTerms";
 import GetFeedItems from "../endpoints/GetFeedItems";
 import GetAllStaff from "../endpoints/GetAllStaff";
 import GetGroupActivitiesList from "../endpoints/GetGroupActivitiesList";
+import GetAllAcademicGroups from "../endpoints/GetAllAcademicGroups";
 
 puppeteer.use(StealthPlugin());
 
@@ -411,4 +412,5 @@ export class CompassClient {
     public getFeedItems = GetFeedItems;
     public getAllStaff = GetAllStaff;
     public getGroupActivitiesList = GetGroupActivitiesList;
+    public getAllAcademicGroups = GetAllAcademicGroups;
 }
