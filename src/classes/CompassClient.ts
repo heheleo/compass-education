@@ -65,6 +65,11 @@ export class CompassClient {
      */
     public userID: number = -1;
     /**
+     * The key used for requests such as learning tasks and fetching academic
+     * groups.
+     */
+    public schoolConfigKey: string | null = null;
+    /**
      * Whether the cookies have been set in the browser.
      */
     private hasSetCookies: boolean = false;
@@ -331,11 +336,25 @@ export class CompassClient {
             const userId = await this["page"].evaluate(
                 "window?.Compass?.organisationUserId"
             );
+            
             if (!Number.isInteger(userId)) {
                 throw new Error("Could not find the user ID");
             }
 
             this.userID = userId as number;
+        }
+
+        // Set the school config key if not already set:
+        if(this.schoolConfigKey === null) {
+            const configKey = await this["page"].evaluate(
+                "window?.Compass?.referenceDataCacheKeys?.schoolConfigKey"
+            );
+
+            if(typeof configKey !== "string") {
+                throw new Error("Could not find the school config key.");
+            }
+
+            this.schoolConfigKey = configKey;
         }
 
         this.baseURL = this.page.url();
