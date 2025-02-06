@@ -1,6 +1,6 @@
 {
 	"name": "compass-education",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"description": "Interact with Compass, an online Australian education platform",
 	"main": "dist/cjs/index.cjs",
 	"module": "dist/esm/index.mjs",
