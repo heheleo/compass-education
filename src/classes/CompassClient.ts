@@ -151,8 +151,10 @@ export class CompassClient {
      * Compass's endpoints.
      *
      * This creates the browser used for making requests to Compass's endpoints.
+     * 
+     * @returns {CompassClient} the instance of the client
      */
-    public async initialise() {
+    public async initialise(): CompassClient {
         this.browser = await puppeteer.launch({
             headless: true,
             defaultViewport: { width: 800, height: 600 },
@@ -179,7 +181,7 @@ export class CompassClient {
      * @param baseURL the base URL of the institute
      * @returns {CompassClient} the instance of the client
      */
-    public setBaseURL(baseURL: string) {
+    public setBaseURL(baseURL: string): CompassClient {
         // Check if base URL contains the protocol:
         this.baseURL = baseURL.startsWith("https")
             ? baseURL
