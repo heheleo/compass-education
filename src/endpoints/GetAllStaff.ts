@@ -2,6 +2,10 @@ import { CompassClient } from "../classes/CompassClient";
 
 export interface CompassStaff {
     /**
+     * A unique identifier for the staff member.
+     */
+    id: number | null
+    /**
      * The display code of the staff member.
      * @example "JHD"
      */
@@ -58,6 +62,7 @@ export default async function GetAllStaff(
     const transformed = staffMembers.map(
         (staffMember: any) =>
             ({
+                id: staffMember?.id ?? null,
                 displayCode: staffMember?.displayCode ?? null,
                 campusId: staffMember?.campusId ?? null,
                 firstName: staffMember?.fn ?? null,
