@@ -80,6 +80,10 @@ export interface CompassFeedItem {
      */
     isViewed: boolean;
     /**
+     * Whether the feed item is a priority item.
+     */
+    isPriority: boolean;
+    /**
      * The content of the feed item.
      */
     content: string | null;
@@ -164,6 +168,7 @@ export default async function GetFeedItems(
                 id: item?.feedItemId ?? null,
                 isSaved: !!item?.isSaved,
                 isViewed: !!item?.isViewed,
+                isPriority: !!item?.isPriority,
                 content: item?.itemContent ?? null,
                 title: item?.title ?? null,
             }) as CompassFeedItem
