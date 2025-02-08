@@ -12,6 +12,8 @@ import GetAllStaff from "../endpoints/GetAllStaff";
 import GetGroupActivitiesList from "../endpoints/GetGroupActivitiesList";
 import GetAllAcademicGroups from "../endpoints/GetAllAcademicGroups";
 import GetAllLearningTasks from "../endpoints/GetAllLearningTasks";
+import GetAllCampuses from "../endpoints/GetAllCampuses";
+import GetAllSubjects from "../endpoints/GetAllSubjects";
 
 puppeteer.use(StealthPlugin());
 
@@ -417,4 +419,6 @@ export class CompassClient {
     public getGroupActivitiesList = GetGroupActivitiesList;
     public getAllAcademicGroups = GetAllAcademicGroups;
     public getAllLearningTasks = GetAllLearningTasks;
+    public getAllCampuses = GetAllCampuses;
+    public getAllSubjects = GetAllSubjects;
 }
