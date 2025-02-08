@@ -8,7 +8,7 @@ export interface CompassLearningTaskGradingItem {
     /**
      * Whether the grading item is reflected in the semester report.
      */
-    includeInSemesterReport?: boolean;
+    includeInSemesterReport: boolean | null;
     /**
      * The name of the grading item.
      * @example "Percentage" "Comment"
@@ -28,7 +28,7 @@ export interface CompassLearningTaskResult {
     /**
      * When the result was submitted.
      */
-    modifiedTimestamp?: Date;
+    modifiedTimestamp: Date | null;
 }
 
 export interface CompassLearningTask {
@@ -46,7 +46,7 @@ export interface CompassLearningTask {
      * The group that the learning task is directed to.
      * @example "CHEM4"
      */
-    groupName?: string;
+    groupName: string | null;
     /**
      * The unique ID of the learning task.
      */
@@ -56,15 +56,15 @@ export interface CompassLearningTask {
      * accurately reflect the importance of the task, as teachers can mark tasks
      * as important for various reasons.
      */
-    important?: boolean;
+    important: boolean | null;
     /**
      * When the learning task was created.
      */
-    startDate?: Date;
+    startDate: Date | null;
     /**
      * When the learning task is due.
      */
-    dueDate?: Date;
+    dueDate: Date | null;
     /**
      * The grading items for the learning task. This is crucial in understanding
      * the results.
@@ -79,11 +79,11 @@ export interface CompassLearningTask {
     /**
      * When the learning task was submitted, if applicable.
      */
-    submittedTimestamp?: Date;
+    submittedTimestamp: Date | null;
     /**
      * The subject name of the learning task.
      */
-    subjectName?: string;
+    subjectName: string | null;
 }
 
 interface CompassGetAllLearningTasksConfig {
@@ -142,37 +142,43 @@ export default async function GetAllLearningTasks(
 
     const learningTasks = request.d.data;
     const transformed = learningTasks.map(
-        (task: any) => ({
-            name: task.name,
-            description: task.description,
-            groupName: task.groupName,
-            id: task.id,
-            important: task.important,
-            startDate: task.activityStart ? new Date(task.activityStart) : undefined,
-            dueDate: task.dueDateTimestamp ? new Date(task.dueDateTimestamp) : undefined,
-            gradingItems: task.gradingItems.map(
-                (item: any) =>
-                    ({
-                        id: item.id,
-                        includeInSemesterReport: item?.includeInSemesterReport ?? null,
-                        name: item.name,
-                    }) as CompassLearningTaskGradingItem
-            ),
-            results: task?.students?.[0]?.results?.map(
-                (result: any) =>
-                    ({
-                        id: result.id,
-                        result: result.result,
-                        modifiedTimestamp: result.modifiedTimestamp
-                            ? new Date(result.modifiedTimestamp)
-                            : undefined,
-                    }) as CompassLearningTaskResult
-            ),
-            submittedTimestamp: task.submittedTimestamp
-                ? new Date(task.submittedTimestamp)
-                : undefined,
-            subjectName: task.subjectName,
-        }) as CompassLearningTask
+        (task: any) =>
+            ({
+                name: task?.name,
+                description: task?.description,
+                groupName: task?.groupName ?? null,
+                id: task?.id,
+                important: task?.important ?? null,
+                startDate: task.activityStart
+                    ? new Date(task.activityStart)
+                    : null,
+                dueDate: task.dueDateTimestamp
+                    ? new Date(task.dueDateTimestamp)
+                    : null,
+                gradingItems: task.gradingItems.map(
+                    (item: any) =>
+                        ({
+                            id: item.id,
+                            includeInSemesterReport:
+                                item?.includeInSemesterReport ?? null,
+                            name: item.name,
+                        }) as CompassLearningTaskGradingItem
+                ),
+                results: task?.students?.[0]?.results?.map(
+                    (result: any) =>
+                        ({
+                            id: result.id,
+                            result: result.result,
+                            modifiedTimestamp: result.modifiedTimestamp
+                                ? new Date(result.modifiedTimestamp)
+                                : null,
+                        }) as CompassLearningTaskResult
+                ),
+                submittedTimestamp: task.submittedTimestamp
+                    ? new Date(task.submittedTimestamp)
+                    : null,
+                subjectName: task?.subjectName ?? null,
+            }) as CompassLearningTask
     );
 
     return transformed;
