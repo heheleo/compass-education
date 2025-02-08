@@ -154,7 +154,7 @@ export class CompassClient {
      * 
      * @returns {CompassClient} the instance of the client
      */
-    public async initialise(): CompassClient {
+    public async initialise(): Promise<CompassClient> {
         this.browser = await puppeteer.launch({
             headless: true,
             defaultViewport: { width: 800, height: 600 },
