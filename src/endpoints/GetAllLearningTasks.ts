@@ -111,7 +111,7 @@ export default async function GetAllLearningTasks(
     // Check if the academic group ID is provided:
     if (!config?.academicGroupId) {
         throw new Error(
-            "Academic group ID is required to fetch learning tasks."
+            "Academic group ID is required to fetch learning tasks. Fetch it using CompassClient.getAllAcademicGroups()."
         );
     }
 
